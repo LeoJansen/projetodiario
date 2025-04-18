@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#keys
+diariodebordo-456723-8b6676b494ce.json
