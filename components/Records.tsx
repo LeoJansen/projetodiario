@@ -2,7 +2,7 @@
 // components/UltimosRegistros.js
 import { useState, useEffect } from 'react';
 
-export default function Records() {
+export default function Records({placa} : {placa: string}) {
     const [registros, setRegistros] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ export default function Records() {
             setIsLoading(true);
             setError(null);
             try {
-                const response = await fetch('/api/sheets/get-records'); // Chama nossa nova API route
+                const response = await fetch(`/api/sheets/get-records/${placa}`); // Chama nossa nova API route
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.message || `Erro ${response.status}`);
@@ -25,7 +25,9 @@ export default function Records() {
                 setError(err.message);
             } finally {
                 setIsLoading(false);
+                // Log para verificar os dados
             }
+            console.log("Registros carregados:", registros); 
         };
 
         fetchData(); // Chama a função ao montar o componente

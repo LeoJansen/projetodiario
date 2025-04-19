@@ -1,3 +1,4 @@
+import Records from "@/components/Records";
 
 const Page = async ({
   params,
@@ -8,6 +9,7 @@ const Page = async ({
 
   return (
     <div>
+      <Records placa={placa}/>
       {placa}
 
     </div>

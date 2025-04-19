@@ -1,8 +1,6 @@
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
 
-// Quantos dos últimos registros buscar
-const NUM_RECORDS_TO_FETCH = 10; // Ajuste conforme necessário
 
 // Defina os cabeçalhos EXATAMENTE como estão na sua planilha (e na ordem correta)
 const headers = [
@@ -56,7 +54,21 @@ export async function GET() {
             record.id = `record-${allValues.length - lastRecordsRaw.length + rowIndex}`;
             return record;
         }).reverse(); // Inverte para mostrar o mais recente primeiro
-        console.log('Últimos registros:', lastRecords); // Log para verificar os dados
+        const vtrChegadas = lastRecords.filter((record) => {
+            if(record.vtrChegada == "LOGAN ASZ5598") {
+                return record;
+            }
+            return
+
+        })
+        const vtrSaidas = lastRecords.filter((record) => {
+            if(record.vtrSaida == "LOGAN ASZ5598") {
+                return record;
+            }
+            return
+        })
+        console.log("vtrChegadas ", vtrChegadas)
+        console.log("vtrSaidas ", vtrSaidas)
         return new Response(JSON.stringify(lastRecords), { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar dados do Google Sheets:', error.response?.data || error.message);
