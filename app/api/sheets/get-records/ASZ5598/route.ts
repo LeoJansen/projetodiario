@@ -55,21 +55,52 @@ export async function GET() {
             return record;
         }).reverse(); // Inverte para mostrar o mais recente primeiro
         const vtrChegadas = lastRecords.filter((record) => {
-            if(record.vtrChegada == "LOGAN ASZ5598") {
+            if (record.vtrChegada == "LOGAN ASZ5598") {
                 return record;
             }
             return
 
         })
         const vtrSaidas = lastRecords.filter((record) => {
-            if(record.vtrSaida == "LOGAN ASZ5598") {
+            if (record.vtrSaida == "LOGAN ASZ5598") {
                 return record;
             }
             return
         })
         console.log("vtrChegadas ", vtrChegadas)
         console.log("vtrSaidas ", vtrSaidas)
-        return new Response(JSON.stringify(lastRecords), { status: 200 });
+
+
+        // Combinar registros de saída e chegada em índices pares e ímpares
+        const combinedRecords: Record<string, string>[] = [];
+        let chegadaIndex = 0;
+        let saidaIndex = 0;
+
+        while (chegadaIndex < vtrChegadas.length || saidaIndex < vtrSaidas.length) {
+            if (saidaIndex < vtrSaidas.length) {
+                combinedRecords.push(vtrSaidas[saidaIndex]);
+                saidaIndex++;
+            }
+            if (chegadaIndex < vtrChegadas.length) {
+                combinedRecords.push(vtrChegadas[chegadaIndex]);
+                chegadaIndex++;
+            }
+        }
+
+        console.log("Registros combinados:", combinedRecords);
+
+        // Remover quaisquer índices vazios (caso existam)
+        const finalRecords = combinedRecords.filter((record) => record !== undefined);
+
+        //console.log("Registros combinados:", finalRecords);
+
+
+
+
+
+
+
+        return new Response(JSON.stringify(combinedRecords), { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar dados do Google Sheets:', error.response?.data || error.message);
         const googleApiErrorMessage = error.response?.data?.error?.message;
