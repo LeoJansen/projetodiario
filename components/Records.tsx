@@ -91,9 +91,7 @@ export default function Records({ placa }: { placa: string }) {
                                 <TableCell>{reg.finalidade}</TableCell>
                                 <TableCell className="text-right">{reg.observacoes}</TableCell>
                             </TableRow>
-
                         ))}
-
                     </TableBody>
                 </Table>
             </div>

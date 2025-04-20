@@ -1,21 +1,20 @@
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
 
-// Quantos dos últimos registros buscar
-const NUM_RECORDS_TO_FETCH = 10; // Ajuste conforme necessário
 
 // Defina os cabeçalhos EXATAMENTE como estão na sua planilha (e na ordem correta)
 const headers = [
     'carimbo',
     'login',
     'tipoDeRegistro',
+    'vtrSaida',
+    'dataSaida',
+    'horaSaida',
+    'kmSaida',
     'vtrChegada',
     'dataChegada',
+    'horaChegada',
     'kmChegada',
-    'vtrSaída',
-    'dataSaída',
-    'horaSaída',
-    'kmSaída',
     'finalidade',
     'procedimento'
 ];
@@ -55,9 +54,65 @@ export async function GET() {
             // Adiciona um id simples baseado no índice (útil para keys no React)
             record.id = `record-${allValues.length - lastRecordsRaw.length + rowIndex}`;
             return record;
-        }).reverse(); // Inverte para mostrar o mais recente primeiro
-        console.log('Últimos registros:', lastRecords); // Log para verificar os dados
-        return new Response(JSON.stringify(lastRecords), { status: 200 });
+        }) 
+        const vtrChegadas = lastRecords.filter((record) => {
+            if (record.vtrChegada == "DUSTER AWD6931") {
+                return record;
+            }
+            return
+
+        })
+        const vtrSaidas = lastRecords.filter((record) => {
+            if (record.vtrSaida == "DUSTER AWD6931") {
+                return record;
+            }
+            return
+        })
+        //console.log("vtrChegadas ", vtrChegadas)
+        //console.log("vtrSaidas ", vtrSaidas)
+       
+        const newIndex = vtrChegadas.length > vtrSaidas.length ? vtrChegadas : vtrSaidas
+
+        const responseArray = []
+
+        for (let i = 0; i < newIndex.length; i++) {
+       
+            responseArray.push(
+                {
+                    dataSaida: vtrSaidas[i].dataSaida,
+                    horaSaida: vtrSaidas[i].horaSaida,
+                    kmSaida: vtrSaidas[i].kmSaida,
+                    motoristaSaida: vtrSaidas[i].login,
+                    dataChegada: vtrChegadas[i].dataChegada,
+                    horaChegada: vtrChegadas[i].horaChegada,
+                    kmChegada: vtrChegadas[i].kmChegada,
+                    motoristaChegada: vtrChegadas[i].login,
+                    finalidade: vtrChegadas[i].finalidade,
+                    procedimento: vtrChegadas[i].procedimento
+                },
+            )
+        }
+console.log("responseArray \n", responseArray)
+
+
+
+
+
+
+
+
+
+
+        //console.log("Registros combinados em pares:", pairedRecords);
+
+
+
+
+
+
+
+
+        return new Response(JSON.stringify(responseArray), { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar dados do Google Sheets:', error.response?.data || error.message);
         const googleApiErrorMessage = error.response?.data?.error?.message;
