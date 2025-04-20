@@ -1,8 +1,17 @@
 "use client";
 // components/UltimosRegistros.js
 import { useState, useEffect } from 'react';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
 
-export default function Records({placa} : {placa: string}) {
+export default function Records({ placa }: { placa: string }) {
     const [registros, setRegistros] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,7 +36,7 @@ export default function Records({placa} : {placa: string}) {
                 setIsLoading(false);
                 // Log para verificar os dados
             }
-            console.log("Registros carregados:", registros); 
+            console.log("Registros carregados:", registros);
         };
 
         fetchData(); // Chama a função ao montar o componente
@@ -50,41 +59,45 @@ export default function Records({placa} : {placa: string}) {
     return (
         <div>
             <h2>Últimos Registros de Viagem</h2>
-            <div style={{ overflowX: 'auto' }}> {/* Para rolagem horizontal em telas pequenas */}
-                <table border="1" cellPadding="5" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                        <tr>
-                            <th>Data Saída</th>
-                            <th>Hora Saída</th>
-                            <th>Km Saída</th>
-                            <th>Motorista Saída</th>
-                            <th>Data Chegada</th>
-                            <th>Hora Chegada</th>
-                            <th>Km Chegada</th>
-                            <th>Motorista Chegada</th>
-                            <th>Finalidade</th>
-                            <th>Observações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div>
+                <Table>
+                    <TableCaption>Registros da VTR</TableCaption>
+                    <TableHeader>
+                        <TableRow >
+                            <TableHead className="w-[100px]">Data Saída</TableHead>
+                            <TableHead className="text-center">Hora Saída</TableHead>
+                            <TableHead className="text-center">Km Saída</TableHead>
+                            <TableHead className="text-center" >Motorista Saída</TableHead>
+                            <TableHead className="text-center">Data Chegada</TableHead>
+                            <TableHead className="text-center">Hora Chegada</TableHead>
+                            <TableHead className="text-center">Km Chegada</TableHead>
+                            <TableHead className="text-center">Motorista Chegada</TableHead>
+                            <TableHead className="text-center">Finalidade</TableHead>
+                            <TableHead className="text-center">Observações</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+
                         {registros.map((reg) => (
-                            <tr key={reg.id}> {/* Usa o id gerado na API */}
-                                <td>{reg.dataSaida}</td>
-                                <td>{reg.horaSaida}</td>
-                                <td>{reg.kmSaida}</td>
-                                <td>{reg.motoristaSaida}</td>
-                                <td>{reg.dataChegada}</td>
-                                <td>{reg.horaChegada}</td>
-                                <td>{reg.kmChegada}</td>
-                                <td>{reg.motoristaChegada}</td>
-                                <td>{reg.finalidade}</td>
-                                <td>{reg.observacoes}</td>
-                            </tr>
+                            <TableRow key={reg.id}>
+                                <TableCell className="font-medium">{reg.dataSaida}</TableCell>
+                                <TableCell className="text-center">{reg.horaSaida}</TableCell>
+                                <TableCell className="text-center">{reg.kmSaida}</TableCell>
+                                <TableCell className="text-center">{reg.motoristaSaida}</TableCell>
+                                <TableCell className="text-center">{reg.dataChegada}</TableCell>
+                                <TableCell className="text-center">{reg.horaChegada}</TableCell>
+                                <TableCell className="text-center">{reg.kmChegada}</TableCell>
+                                <TableCell className="text-center">{reg.motoristaChegada}</TableCell>
+                                <TableCell>{reg.finalidade}</TableCell>
+                                <TableCell className="text-right">{reg.observacoes}</TableCell>
+                            </TableRow>
+
                         ))}
-                    </tbody>
-                </table>
+
+                    </TableBody>
+                </Table>
             </div>
-     
+
         </div>
     );
 }
