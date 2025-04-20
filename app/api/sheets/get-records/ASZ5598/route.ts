@@ -7,13 +7,14 @@ const headers = [
     'carimbo',
     'login',
     'tipoDeRegistro',
+    'vtrSaida',
+    'dataSaida',
+    'horaSaida',
+    'kmSaida',
     'vtrChegada',
     'dataChegada',
+    'horaChegada',
     'kmChegada',
-    'vtrSaída',
-    'dataSaída',
-    'horaSaída',
-    'kmSaída',
     'finalidade',
     'procedimento'
 ];
@@ -53,7 +54,7 @@ export async function GET() {
             // Adiciona um id simples baseado no índice (útil para keys no React)
             record.id = `record-${allValues.length - lastRecordsRaw.length + rowIndex}`;
             return record;
-        }).reverse(); // Inverte para mostrar o mais recente primeiro
+        }) 
         const vtrChegadas = lastRecords.filter((record) => {
             if (record.vtrChegada == "LOGAN ASZ5598") {
                 return record;
@@ -67,32 +68,36 @@ export async function GET() {
             }
             return
         })
-        console.log("vtrChegadas ", vtrChegadas)
+        //console.log("vtrChegadas ", vtrChegadas)
         console.log("vtrSaidas ", vtrSaidas)
+        /*
+        const newIndex = vtrChegadas.length > vtrSaidas.length ? vtrChegadas : vtrSaidas
 
+        const responseArray = []
 
-        // Combinar registros de saída e chegada em índices pares e ímpares
-        const combinedRecords: Record<string, string>[] = [];
-        let chegadaIndex = 0;
-        let saidaIndex = 0;
-
-        while (chegadaIndex < vtrChegadas.length || saidaIndex < vtrSaidas.length) {
-            if (saidaIndex < vtrSaidas.length) {
-                combinedRecords.push(vtrSaidas[saidaIndex]);
-                saidaIndex++;
-            }
-            if (chegadaIndex < vtrChegadas.length) {
-                combinedRecords.push(vtrChegadas[chegadaIndex]);
-                chegadaIndex++;
-            }
+        for (let i = 0; i < newIndex.length; i++) {
+            console.log("i ", i)
+            console.log(`vtrChegadas[${i}] `, vtrChegadas[i])
+            console.log(`vtrSaidas[${i}] `, vtrSaidas[i])
+            responseArray.push(
+                {
+                    dataSaida: vtrSaidas[i].dataSaida,
+                    horaSaida: vtrSaidas[i].horaSaida,
+                    kmSaida: vtrSaidas[i].kmSaida,
+                    motoristaSaida: vtrSaidas[i].login,
+                    dataChegada: vtrChegadas[i].dataChegada,
+                    horaChegada: vtrChegadas[i].horaChegada,
+                    kmChegada: vtrChegadas[i].kmChegada,
+                    motoristaChegada: vtrChegadas[i].login,
+                    finalidade: vtrChegadas[i].finalidade,
+                    procedimento: vtrChegadas[i].procedimento
+                },
+            )
         }
+console.log("responseArray \n", responseArray)
 
-        console.log("Registros combinados:", combinedRecords);
 
-        // Remover quaisquer índices vazios (caso existam)
-        const finalRecords = combinedRecords.filter((record) => record !== undefined);
-
-        //console.log("Registros combinados:", finalRecords);
+*/
 
 
 
@@ -100,7 +105,16 @@ export async function GET() {
 
 
 
-        return new Response(JSON.stringify(combinedRecords), { status: 200 });
+        //console.log("Registros combinados em pares:", pairedRecords);
+
+
+
+
+
+
+
+
+        return new Response(JSON.stringify([...vtrChegadas, ...vtrSaidas]), { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar dados do Google Sheets:', error.response?.data || error.message);
         const googleApiErrorMessage = error.response?.data?.error?.message;
