@@ -69,16 +69,14 @@ export async function GET() {
             return
         })
         //console.log("vtrChegadas ", vtrChegadas)
-        console.log("vtrSaidas ", vtrSaidas)
-        /*
+        //console.log("vtrSaidas ", vtrSaidas)
+       
         const newIndex = vtrChegadas.length > vtrSaidas.length ? vtrChegadas : vtrSaidas
 
         const responseArray = []
 
         for (let i = 0; i < newIndex.length; i++) {
-            console.log("i ", i)
-            console.log(`vtrChegadas[${i}] `, vtrChegadas[i])
-            console.log(`vtrSaidas[${i}] `, vtrSaidas[i])
+       
             responseArray.push(
                 {
                     dataSaida: vtrSaidas[i].dataSaida,
@@ -97,7 +95,7 @@ export async function GET() {
 console.log("responseArray \n", responseArray)
 
 
-*/
+
 
 
 
@@ -114,7 +112,7 @@ console.log("responseArray \n", responseArray)
 
 
 
-        return new Response(JSON.stringify([...vtrChegadas, ...vtrSaidas]), { status: 200 });
+        return new Response(JSON.stringify(responseArray), { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar dados do Google Sheets:', error.response?.data || error.message);
         const googleApiErrorMessage = error.response?.data?.error?.message;

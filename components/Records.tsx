@@ -57,10 +57,11 @@ export default function Records({placa} : {placa: string}) {
                             <th>Data Saída</th>
                             <th>Hora Saída</th>
                             <th>Km Saída</th>
+                            <th>Motorista Saída</th>
                             <th>Data Chegada</th>
                             <th>Hora Chegada</th>
                             <th>Km Chegada</th>
-                            <th>Motorista</th>
+                            <th>Motorista Chegada</th>
                             <th>Finalidade</th>
                             <th>Observações</th>
                         </tr>
@@ -71,10 +72,11 @@ export default function Records({placa} : {placa: string}) {
                                 <td>{reg.dataSaida}</td>
                                 <td>{reg.horaSaida}</td>
                                 <td>{reg.kmSaida}</td>
+                                <td>{reg.motoristaSaida}</td>
                                 <td>{reg.dataChegada}</td>
                                 <td>{reg.horaChegada}</td>
                                 <td>{reg.kmChegada}</td>
-                                <td>{reg.motorista}</td>
+                                <td>{reg.motoristaChegada}</td>
                                 <td>{reg.finalidade}</td>
                                 <td>{reg.observacoes}</td>
                             </tr>
@@ -82,23 +84,7 @@ export default function Records({placa} : {placa: string}) {
                     </tbody>
                 </table>
             </div>
-             <style jsx>{`
-                table {
-                    margin-top: 15px;
-                    font-size: 0.9em;
-                }
-                th, td {
-                    text-align: left;
-                    padding: 8px;
-                    border: 1px solid #ddd;
-                }
-                th {
-                    background-color: #f2f2f2;
-                }
-                tr:nth-child(even) {
-                   background-color: #f9f9f9;
-                }
-            `}</style>
+     
         </div>
     );
 }
