@@ -2,8 +2,17 @@
 // components/UltimosRegistros.js
 import { useState, useEffect } from 'react';
 
-import {  columns} from "@/components/table/columns";
-import { DataTable } from "@/components/table/data-table";
+
+import { SeparatorHorizontal } from 'lucide-react';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card"
+  
 
 export default function Records({ placa }: { placa: string }) {
     const [registros, setRegistros] = useState([]);
@@ -54,11 +63,46 @@ export default function Records({ placa }: { placa: string }) {
         <div>
             <h2>Últimos Registros de Viagem</h2>
             <div className='flex flex-col items-center justify-center w-full'>
-           
-                <DataTable columns={columns} data={registros}/>
-           
-            </div>
 
+                {registros.map((registro: any, index: number) => (
+                    <div key={index} className='flex flex-col w-[500px] gap-2'>
+                        <div className='flex w-full gap-2 justify-center items-center'>
+                            <Card className='flex gap-2 rounded-[6px] border-none'>
+                                <CardHeader>
+                                <CardDescription className='text-center'>Saída</CardDescription>
+                                    <CardTitle> {registro.dataSaida}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                {registro.kmSaida}
+                                </CardContent>
+                                <CardFooter>
+                               {registro.horaSaida}
+                                </CardFooter>
+                            </Card>
+                            <Card className='flex gap-2 rounded-[6px] border-none '>
+                                <CardHeader>
+                                <CardDescription className='text-center'>Chegada</CardDescription>
+                                    <CardTitle> {registro.dataChegada}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                {registro.kmChegada}
+                                </CardContent>
+                                <CardFooter>
+                               {registro.horaChegada}
+                                </CardFooter>
+                            </Card>
+                        </div>
+
+                        <SeparatorHorizontal className="w-full h-[1px] bg-gray-200 my-4" />
+
+                    </div>
+                ))}
+
+
+
+
+
+            </div>
         </div>
     );
 }
