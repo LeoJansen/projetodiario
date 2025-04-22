@@ -1,15 +1,9 @@
 "use client";
 // components/UltimosRegistros.js
 import { useState, useEffect } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+
+import {  columns} from "@/components/table/columns";
+import { DataTable } from "@/components/table/data-table";
 
 export default function Records({ placa }: { placa: string }) {
     const [registros, setRegistros] = useState([]);
@@ -59,41 +53,10 @@ export default function Records({ placa }: { placa: string }) {
     return (
         <div>
             <h2>Últimos Registros de Viagem</h2>
-            <div>
-                <Table>
-                    <TableCaption>Registros da VTR</TableCaption>
-                    <TableHeader>
-                        <TableRow >
-                            <TableHead className="w-[100px]">Data Saída</TableHead>
-                            <TableHead className="text-center">Hora Saída</TableHead>
-                            <TableHead className="text-center">Km Saída</TableHead>
-                            <TableHead className="text-center" >Motorista Saída</TableHead>
-                            <TableHead className="text-center">Data Chegada</TableHead>
-                            <TableHead className="text-center">Hora Chegada</TableHead>
-                            <TableHead className="text-center">Km Chegada</TableHead>
-                            <TableHead className="text-center">Motorista Chegada</TableHead>
-                            <TableHead className="text-center">Finalidade</TableHead>
-                            <TableHead className="text-center">Observações</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-
-                        {registros.map((reg) => (
-                            <TableRow key={reg.id}>
-                                <TableCell className="font-medium">{reg.dataSaida}</TableCell>
-                                <TableCell className="text-center">{reg.horaSaida}</TableCell>
-                                <TableCell className="text-center">{reg.kmSaida}</TableCell>
-                                <TableCell className="text-center">{reg.motoristaSaida}</TableCell>
-                                <TableCell className="text-center">{reg.dataChegada}</TableCell>
-                                <TableCell className="text-center">{reg.horaChegada}</TableCell>
-                                <TableCell className="text-center">{reg.kmChegada}</TableCell>
-                                <TableCell className="text-center">{reg.motoristaChegada}</TableCell>
-                                <TableCell>{reg.finalidade}</TableCell>
-                                <TableCell className="text-right">{reg.observacoes}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+            <div className='flex flex-col items-center justify-center w-full'>
+           
+                <DataTable columns={columns} data={registros}/>
+           
             </div>
 
         </div>
