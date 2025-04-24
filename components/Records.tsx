@@ -67,13 +67,15 @@ export default function Records({ placa }: { placa: string }) {
                 {registros.map((registro: any, index: number) => (
                     <div key={index} className='flex flex-col w-[500px] gap-2'>
                         <div className='flex w-full gap-2 justify-center items-center'>
-                            <Card className='flex gap-2 rounded-[6px] border-none'>
+                            <Card className='flex gap-2 rounded-[6px] border-none bg-[#2d333a] '>
                                 <CardHeader>
-                                <CardDescription className='text-center'>Saída</CardDescription>
-                                    <CardTitle> {registro.dataSaida}</CardTitle>
+                                <CardDescription className='text-center '>Saída</CardDescription>
+                                    <CardTitle> {registro.kmSaida} </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                {registro.kmSaida}
+                               
+
+                                {registro.dataSaida}
                                 </CardContent>
                                 <CardFooter>
                                {registro.horaSaida}
@@ -82,10 +84,11 @@ export default function Records({ placa }: { placa: string }) {
                             <Card className='flex gap-2 rounded-[6px] border-none '>
                                 <CardHeader>
                                 <CardDescription className='text-center'>Chegada</CardDescription>
-                                    <CardTitle> {registro.dataChegada}</CardTitle>
+                                    <CardTitle>{registro.kmChegada} </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                {registro.kmChegada}
+                                
+                                {registro.dataChegada}
                                 </CardContent>
                                 <CardFooter>
                                {registro.horaChegada}
