@@ -6,8 +6,11 @@ import { useState, useEffect } from 'react';
 import { SeparatorHorizontal } from 'lucide-react';
 import {
     Card,
+    CardContent,
     CardDescription,
     CardFooter,
+    CardHeader,
+    CardTitle,
   } from "@/components/ui/card"
   
 
@@ -64,25 +67,29 @@ export default function Records({ placa }: { placa: string }) {
                 {registros.map((registro: any, index: number) => (
                     <div key={index} className='flex flex-col w-[500px] gap-2'>
                         <div className='flex w-full gap-2 justify-center items-center'>
-                            <div className='flex flex-row w-40 justify-center  p-0 rounded-[6px] border-none bg-[#2d333a] cursor-pointer '>
-                                <div className='flex flex-col p-2'>
+                            <Card className='flex gap-2 rounded-[6px] border-none bg-[#2d333a] '>
+                                <CardHeader>
                                 <CardDescription className='text-center '>Saída</CardDescription>
-                                    <div> {registro.kmSaida} </div>
-                                </div >
-                                <div className='flex flex-col p-2 text-sm gap-[2px]'>
-                               <p>{registro.dataSaida}</p>
-                               <p>{registro.horaSaida}</p>
-                                </div>      
-                            </div>  
-                            <Card className='flex gap-2 rounded-[6px] border-none cursor-pointer'>
-                                <div>
+                                    <CardTitle> {registro.kmSaida} </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                               
+
+                                {registro.dataSaida}
+                                </CardContent>
+                                <CardFooter>
+                               {registro.horaSaida}
+                                </CardFooter>
+                            </Card>
+                            <Card className='flex gap-2 rounded-[6px] border-none '>
+                                <CardHeader>
                                 <CardDescription className='text-center'>Chegada</CardDescription>
-                                    <div>{registro.kmChegada} </div>
-                                </div>
-                                <div>
+                                    <CardTitle>{registro.kmChegada} </CardTitle>
+                                </CardHeader>
+                                <CardContent>
                                 
                                 {registro.dataChegada}
-                                </div>
+                                </CardContent>
                                 <CardFooter>
                                {registro.horaChegada}
                                 </CardFooter>
