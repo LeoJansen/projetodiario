@@ -22,41 +22,52 @@ export const columns: ColumnDef<RegisterColumns>[] = [
   {
     accessorKey: "dataSaida",
     header: "Data de Saída",
+    size: 50,
+   
   },
   {
     accessorKey: "horaSaida",
     header: "Hora de Saída",
+    size: 50,
   },
   {
     accessorKey: "kmSaida",
     header: "Km de Saída",
+    size: 50,
   },
   {
     accessorKey: "motoristaSaida",
     header: "Motorista",
+    size: 50,
   },
   {
     accessorKey: "dataChegada",
     header: "Data de Chegada",
+    size: 50,
   },
   {
     accessorKey: "horaChegada",
     header: "Hora de Chegada",
+    size: 50,
   },
   {
     accessorKey: "kmChegada",
     header: "Km de Chegada",
+    size: 50,
   },
   {
     accessorKey: "motoristaChegada",
     header: "Motorista",
+    size: 50,
   },
   {
     accessorKey: "finalidade",
     header: "Finalidade",
+    size: 50,
   },
   {
     accessorKey: "observacoes",
     header: "Observações",
+    size: 50,
   },
 ];
