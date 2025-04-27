@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import {  columns} from "@/components/table/columns";
 import { DataTable } from "@/components/table/data-table";
+import { smallColumns } from './table/smallColumns';
 
 export default function Records({ placa }: { placa: string }) {
     const [registros, setRegistros] = useState([]);
@@ -55,7 +56,7 @@ export default function Records({ placa }: { placa: string }) {
             <h2>Últimos Registros de Viagem</h2>
             <div className='flex flex-col items-center justify-center w-full'>
            
-                <DataTable columns={columns} data={registros}/>
+                <DataTable columns={smallColumns} data={registros}/>
            
             </div>
 

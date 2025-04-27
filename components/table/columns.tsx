@@ -39,6 +39,12 @@ export const columns: ColumnDef<RegisterColumns>[] = [
     accessorKey: "motoristaSaida",
     header: "Motorista",
     size: 50,
+    cell: ({ row }) => {
+      const value = row.getValue("motoristaSaida") as string;
+      const index = value.indexOf("@");
+ 
+      return <div className="text-right font-medium">{value.slice(0,index)}</div>
+    },
   },
   {
     accessorKey: "dataChegada",
@@ -59,6 +65,12 @@ export const columns: ColumnDef<RegisterColumns>[] = [
     accessorKey: "motoristaChegada",
     header: "Motorista",
     size: 50,
+    cell: ({ row }) => {
+      const value = row.getValue("motoristaSaida") as string;
+      const index = value.indexOf("@");
+ 
+      return <div className="text-right font-medium">{value.slice(0,index)}</div>
+    },
   },
   {
     accessorKey: "finalidade",
