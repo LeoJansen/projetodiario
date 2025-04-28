@@ -17,7 +17,7 @@ export const HomeCard = () => {
 
     return (
         <div>
-            <Card className="w-96">
+            <Card className="w-96 bg-linear-to-b from-[#4b5ec5] to-[#586bd8] text-white">
                 <CardHeader>
                     <CardTitle>Selecione a Viatura</CardTitle>
                     <CardDescription>Card Description</CardDescription>
